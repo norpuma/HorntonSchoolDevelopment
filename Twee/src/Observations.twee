@@ -1,0 +1,108 @@
+::Lookaround
+You look around and you notice four other people around.
+
+<<set _dannieRef = $protagonist.relationships.get($dannie)>>\
+<<if _dannieRef !== undefined>><<set _name = _dannieRef.targetModel.names.standard>><<else>><<set _name = "Female">><</if>>\
+- <<link _name "Look at Target">><<set $target = $dannie>><</link>>
+<<set _andreaRef = $protagonist.relationships.get($andrea)>>\
+<<if _andreaRef !== undefined>><<set _name = _andreaRef.targetModel.names.standard>><<else>><<set _name = "Female">><</if>>\
+- <<link _name "Look at Target">><<set $target = $andrea>><</link>>
+<<set _carlaRef = $protagonist.relationships.get($carla)>>\
+<<if _carlaRef !== undefined>><<set _name = _carlaRef.targetModel.names.standard>><<else>><<set _name = "Female">><</if>>\
+- <<link _name "Look at Target">><<set $target = $carla>><</link>>
+
+<<set _tyronRef = $protagonist.relationships.get($tyron)>>\
+<<if _tyronRef !== undefined>><<set _name = _tyronRef.targetModel.names.standard>><<else>><<set _name = "Male">><</if>>\
+- <<link _name "Look at Target">><<set $target = $tyron>><</link>>
+<<set _milesRef = $protagonist.relationships.get($miles)>>\
+<<if _milesRef !== undefined>><<set _name = _milesRef.targetModel.names.standard>><<else>><<set _name = "Male">><</if>>\
+- <<link _name "Look at Target">><<set $target = $miles>><</link>>
+
+[[return]]
+
+::Look at Target
+<<if $target == $dannie>>\
+One of the females is a young woman in her late teens, a brunette with long, wavy, black hair and pale skin.
+
+She is short, with an overall petite figure - small breasts, thin waist, not at all leggy - but unexpectedly round buttocks.
+
+She has cute features, a thin-lipped large mouth and an amazing smile. Her dark eyes shine with mystery.
+
+She is wearing a black denim skirt and a white blouse.
+<<elseif $target == $andrea>>\
+
+One of the females is a young woman in her late twenties, a blonde with short hair, blue eyes and a tongue piercing.
+
+She often has an ironic smile at the corner of her mouth and a mischievous twinkle to her eyes.
+
+She is wearing jeans and a band t-shirt.
+
+<<elseif $target == $carla>>\
+One of the females is a mature woman in her mid thirties, a redhead with a shade too intense to be natural. She has tanned skins, full lips and a cunning smile.
+
+She has a self-possessed pose and is wearing a short dress that exposes her strong legs.
+
+She has round, full breasts that seem to defy gravity in her accoutrement.
+<<else>>\
+SOMETHING WENT WRONG.
+<</if>>\
+
+<<link "Select $target.pronouns.object as your target." "Select Approach">><</link>>
+[[return]]
+
+::Look at Target
+<<if $target == $tyron>>\
+One of the males is a young man in his mid-twenties. Tall and athletic, with dark skin and an easy smile.
+
+He is wearing tight pants and a tight t-shirt that put his physique on display.
+<<elseif $target == $miles>>\
+One of the males is a young man in his late teens, a blond, wearing glasses and with a timid demeanor.
+
+He is of short stature and has a weak physique, but his eyes dart around analyzing everything.
+<<else>>\
+SOMETHING WENT WRONG.
+<</if>>\
+[[return]]
+
+::Move to Javascript File [script]
+function addObservationsOfTargetToCharacter(target, character){
+    let relationship = character.relationships.get(target)
+    if (relationship === undefined){
+        relationship = character.relationships.set(target, new Relationship(target))
+    }
+    relationship.targetModel.names.standard = "Some Female"
+    return
+}
+
+window.addObservationsOfTargetToCharacter(target, character){
+    addObservationsOfTargetToCharacter(target, character)
+}
+
+::Observe Some More
+You spend some more time to observe your target.
+
+<<if $target == $dannie>>\
+    <<run addObservationsOfTargetToCharacter($target, $protagonist)>>\
+    <<set _relationship = $protagonist.relationships.get(target)>>\
+    <<set _name = _relationship.targetModel.names.standard>>\
+    _name stands close to the entrance and is looking around the place, her gaze sometimes lingering on the tall young man with dark skin, short hair and a great physique. He is lounging against a wall.
+<<elseif $target == $andrea>>\
+    <<set _relationship = $protagonist.relationships.get(target)>>\
+    <<set _name = _relationship.targetModel.names.standard>>\
+    _name sits at one end of the bar and has her gaze locked on the young brunette close to the entrance. She has a hungry cast to her eyes.
+<<elseif $target == $carla>>\
+    <<set _relationship = $protagonist.relationships.get(target)>>\
+    <<set _name = _relationship.targetModel.names.standard>>\
+    _name doesn't really look at anyone. She seems confident that others will look at her. She strides across the place, from time to time, making sure to draw attention.
+<<elseif $target == $tyron>>\
+    <<set _relationship = $protagonist.relationships.get(target)>>\
+    <<set _name = _relationship.targetModel.names.standard>>\
+    _name is lounging against a wall and looking around. He looks briefly at each of the women around the place, trying not to stare too long at any one them. He pays no attention to any of the men here.
+<<elseif $target == $miles>>\
+    <<set _relationship = $protagonist.relationships.get(target)>>\
+    <<set _name = _relationship.targetModel.names.standard>>\
+    _name has his shoulders hunched over and tries to shoot brief, nervous, discreet glances at everyone around. He seems to mix envy and nervousness when looking at the tall young man with dark skin, short hair and a great physique lounging against a wall. He seems intimidated by everyone, but sometimes stares at the mature woman striding around the floor.
+<<else>>\
+SOMETHING WENT WRONG.
+<</if>>\
+[[return]]

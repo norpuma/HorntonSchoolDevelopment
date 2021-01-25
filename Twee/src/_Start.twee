@@ -1,0 +1,35 @@
+::StoryTitle
+The Wishing Machine
+
+:: StorySettings
+
+:: StoryInit [Variables]
+
+::Start
+<<include "Presentation">>
+
+[[Game Start]]
+
+::Presentation
+This is just a social interaction tester.
+
+::Game Start
+<<set $gameStarted = true>>\
+
+First we will need some characters.
+
+<<include "Generate Characters">>\
+
+The Protagonist (you), Miles, Tyron, Dannie and Andrea have been created.
+
+[[Continue|Lookaround]]
+
+::Feelings Insight
+<<include "Dannie's Feelings for Protagonist">>\
+<<include "Protagonists's Feelings for Dannie">>\
+
+[[Continue]]
+
+::Dannie's Feelings for Protagonist
+
+::Protagonist's Feelings for Dannie
